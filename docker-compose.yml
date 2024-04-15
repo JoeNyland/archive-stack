@@ -9,7 +9,6 @@ services:
       traefik.http.services.archive.loadbalancer.server.port: 80
       traefik.http.routers.archive.rule: >
         Host(`archive`) ||
-        Host(`archive.joe.nyland.io`) ||
         Host(`archive.home.joe.nyland.io`)
     volumes:
       - /tank/archive:/usr/local/apache2/htdocs/archive:ro
