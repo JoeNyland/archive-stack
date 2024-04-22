@@ -1,16 +1,20 @@
 version: '3'
 
 services:
-  web_server:
-    image: httpd
+  web:
+    image: nginx
     restart: unless-stopped
+    network_mode: host
+    ports:
+      - "8000:8000" # Needs to match NGINX_PORT
+    environment:
+      NGINX_PORT: 8000 # This env var must be sustituted in config template
     labels:
       traefik.enable: true
-      traefik.http.services.archive.loadbalancer.server.port: 80
+      traefik.http.services.archive.loadbalancer.server.port: 8000
       traefik.http.routers.archive.rule: >
         Host(`archive`) ||
         Host(`archive.home.joe.nyland.io`)
     volumes:
-      - /tank/archive:/usr/local/apache2/htdocs/archive:ro
-      # Overrides the default 'hello world' file
-      - /dev/null:/usr/local/apache2/htdocs/index.html:ro
+      - /containers/archive/templates:/etc/nginx/templates:ro
+      - /tank/archive:/var/www/html:ro
