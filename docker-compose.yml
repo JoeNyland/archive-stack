@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     network_mode: host
     ports:
-      - "8000:8000" # Needs to match NGINX_PORT
+      - "5000:5000" # Needs to match NGINX_PORT
     environment:
       NGINX_PORT: 5000 # This env var must be sustituted in config template
     labels:
