@@ -12,9 +12,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.services.archive.loadbalancer.server.port: 5000
-      traefik.http.routers.archive.rule: >
-        Host(`archive`) ||
-        Host(`archive.home.joe.nyland.io`)
+      traefik.http.routers.archive.rule: Host(`archive`)
     volumes:
       - /containers/archive/templates:/etc/nginx/templates:ro
       - /tank/archive:/var/www/html:ro
