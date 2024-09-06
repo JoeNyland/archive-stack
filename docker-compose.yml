@@ -12,14 +12,6 @@ services:
       traefik.enable: true
       traefik.http.services.archive.loadbalancer.server.port: 5000
       traefik.http.routers.archive.rule: Host(`archive`)
-      traefik.http.routers.archive.middlewares: archive-ipallowlist
-      traefik.http.middlewares.archive-ipallowlist.ipallowlist.sourcerange: >
-        ::1/128,
-        127.0.0.1/32,
-        2a00:23c8:bda0:b300::/56,
-        10.0.0.0/8,
-        fdff:0205:2005::/123,
-        172.16.255.0/27
     volumes:
       - /containers/archive/templates:/etc/nginx/templates:ro
       - /tank/archive:/var/www/html:ro
